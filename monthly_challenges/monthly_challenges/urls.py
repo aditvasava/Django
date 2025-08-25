@@ -19,6 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     # whenever the path is localhost:8000/challenges, go to the challenges app,
     # it is then the job of urls file in the challenges folder to render the pages/views
     path('challenges/', include("challenges.urls"))

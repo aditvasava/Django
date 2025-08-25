@@ -46,6 +46,7 @@ Python from microsoft
 Pylance from microsoft
 
 django-admin startproject [PROJECT-NAME]
+django-admin startproject mypage
 
 Above command creates a project structure like:
 
@@ -74,7 +75,7 @@ Create an App
 
 python manage.py startapp [APP-NAME] (this command will create a folder similar to the one above "mypage")
 
-app/module is similar to a feature of the project (Kind of like components in react app)
+app or module is similar to a feature of the project (Kind of like components in react app)
 You're building google, so google is the main project, gmap, gmail, gimage can be said as apps
 
 The only important file for now is the "views.py" file, this is the file which is used to display content on webpage
@@ -85,7 +86,8 @@ URLs (Routes) & Views
 django-admin startproject monthly_challenges
 python manage.py startapp challenges
 
-Views - logic that is executed for different URLs. A view is basically just a python function that gets executed when request for a certain url reaches the server.
+Views - logic that is executed for different URLs. A view is basically just a python function that gets executed when request for a certain url 
+reaches the server.
 
 start the server
 
@@ -93,4 +95,4 @@ localhost:8000/challenges/january
 
 go to ./challenges/views.py
 define the function
-create urls.py inside challenges folder
+create urls.py file inside challenges folder
