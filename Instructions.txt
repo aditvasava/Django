@@ -1,0 +1,96 @@
+Here begins the great info of Django
+
+----------------------------------------------------------------------------------
+
+Django - Python Web development framework
+Built for python 3.x and above
+
+What's required to learn django ?
+Basic Python knowledge
+Basic Web Dev - html, css, js
+
+This course can be broken into 3 sections
+
+Foundation
+    Setup & understanding django projects
+    urls, routes, views
+    templats & static files
+    data, models & relationships
+
+Beyond the basics
+    working with forms
+    class-based views
+    file uploads
+    sessions
+
+Preparing for Reality
+    Small examples
+    A real project (Building a Blog app)
+        frontend + Admin area
+        In-Depth deployment guide
+
+----------------------------------------------------------------------------------
+Install Django
+
+Download and install python latest version from python.org, then open cmd with admin privileges
+
+python (check if python is installed)
+python -m pip install Django (Install django)
+django-admin (check if django is installed properly)
+
+###########################
+Create a django project
+
+Install these extensions in VS code
+Python from microsoft
+Pylance from microsoft
+
+django-admin startproject [PROJECT-NAME]
+
+Above command creates a project structure like:
+
+mypage
+    - __init__.py
+    - asgi.py
+    - settings.py
+    - urls.py
+    - wsgi.py
+manage.py
+
+manage.py is not to be touched initially,
+inside mypage directory, __init__.py is also not important as it just marks that this a folder that consists of python packages
+asgi & wsgi files are used to deal with deployment stuff. The only 2 files that are important are settings.py & urls.py. And ofcourse,
+our own custom .py files that we create to build project.
+
+###########################
+Start a development server
+
+python manage.py runserver (usually starts at localhost:8000)
+
+After running the server, it will automatically create a db.sqlite3 file in the folder, ignore this file
+
+###########################
+Create an App
+
+python manage.py startapp [APP-NAME] (this command will create a folder similar to the one above "mypage")
+
+app/module is similar to a feature of the project (Kind of like components in react app)
+You're building google, so google is the main project, gmap, gmail, gimage can be said as apps
+
+The only important file for now is the "views.py" file, this is the file which is used to display content on webpage
+
+----------------------------------------------------------------------------------
+URLs (Routes) & Views
+
+django-admin startproject monthly_challenges
+python manage.py startapp challenges
+
+Views - logic that is executed for different URLs. A view is basically just a python function that gets executed when request for a certain url reaches the server.
+
+start the server
+
+localhost:8000/challenges/january
+
+go to ./challenges/views.py
+define the function
+create urls.py inside challenges folder
