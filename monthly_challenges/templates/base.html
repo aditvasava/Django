@@ -2,6 +2,9 @@
 So this is the base html file, this is kind of like the layout file where some elements are common to all pages in the project
 {% endcomment %}
 
+{% comment %} Load static plugin {% endcomment %}
+{% load static %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +18,8 @@ So this is the base html file, this is kind of like the layout file where some e
         </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        {% block css_files %}{% endblock %}
+        <link rel="stylesheet" href="{% static "base.css" %}">
     </head>
     <body>
         {% block content %}{% endblock %}

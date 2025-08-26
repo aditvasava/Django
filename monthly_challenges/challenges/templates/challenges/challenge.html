@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 {% comment %} This is kind of like importing the base.html file. Always write extends at the top of file otherwise django will throw error. {% endcomment %}
 
+{% load static %}
+
+{% comment %} 
+To use css files, use this method 
+{% endcomment %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static "challenges/challenge.css" %}">
+<link rel="stylesheet" href="{% static "challenges/includes/header.css" %}">
+{% endblock %}
+
 {% block page_title %}
     Monthly Challenge
 {% endblock %}

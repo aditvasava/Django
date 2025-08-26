@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect,Http404
 
 # reverse used to handle dynamic urls 
 from django.urls import reverse
@@ -94,4 +94,9 @@ def monthly_challenge(request, month):
         # capitalized_month = month.capitalize()
         return render(request, "challenges/challenge.html", {"text": challenge_text, "title": month}) # writing this is same as what the above 2 code line does.
     except:
-        return HttpResponseNotFound("<h2>Month does not exist</h2>")
+        # this will look for 404.html in the templates folder at the root level, so make sure this file exists
+        # for this to work, debug should be set to false in settings.py file
+        raise Http404()
+        # response_data = render_to_string("404.html") # we cannot use render() as it only works for success status codes
+        # return HttpResponseNotFound("<h2>Month does not exist</h2>")
+        # return HttpResponseNotFound(response_data)
