@@ -96,3 +96,18 @@ localhost:8000/challenges/january
 go to ./challenges/views.py
 define the function
 create urls.py file inside challenges folder
+
+----------------------------------------------------------------------------------
+Templates & Static Files
+
+So we want to send html files to user
+
+Create a folder named "templates" in the challenges app (This name should always be "templates")
+create a sub-folder named challenges in the templates and then create .html files inside it (The names inside the templates folder can be anything)
+
+----------------------------------------------------------------------------------
+Template Language & Variable Interpolation
+
+Django Template Language (DTL)
+
+Standard HTML Syntax + Special DTL Syntax = Dynamic HTML content returned with response

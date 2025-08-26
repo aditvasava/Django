@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% comment %} This is kind of like importing the base.html file. Always write extends at the top of file otherwise django will throw error. {% endcomment %}
+
+{% block page_title %}
+    Monthly Challenge
+{% endblock %}
+
+{% block content %}
+{% comment %} include is kind of like calling component of react, header.html is the component and we are calling it here {% endcomment %}
+{% comment %} the variables passed to this file (title, text) will be passed to the included file as well. {% endcomment %}
+{% comment %} we can also pass custom variables that are defined in this file {% endcomment %}
+{% comment %} {% include "./includes/header.html" with some_var="VarValue" %} and then access it in the component file using {{some_var}} {% endcomment %}
+    {% include "./includes/header.html" %}
+            <h1>{{ title | title }} challenge</h1>
+        {% if text is not None %}
+            <h2>{{ text }}</h2>
+        {% else %}
+            <p>There is no challenge for this month.</p>
+        {% endif %}
+{% endblock %}

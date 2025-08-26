@@ -4,9 +4,11 @@ from . import views
 
 # This is the normal syntax, nothing to be memorized
 urlpatterns = [
-    # whenever the url is challenges/january, execute the index function in views.py file
+    # whenever the url is challenges/january, execute the january function in views.py file
     # path("january", views.january),
     # path("february", views.february),
+
+    path("", views.index, name="index"), # localhost:8000/challenges will be handled by views.index function
 
     # <> is used for dynamic urls
     path("<int:month>", views.monthly_challenge_by_number), # for routes - challenges/1 , challenges/2 ...

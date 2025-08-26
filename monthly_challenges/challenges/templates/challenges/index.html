@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% comment %} This is kind of like importing the base.html file. Always write extends at the top of file otherwise django will throw error. {% endcomment %}
+
+{% block page_title %}
+    All Challenges
+{% endblock %}
+
+{% block content %}
+{% comment %} include is kind of like calling component of react, header.html is the component and we are calling it here {% endcomment %}
+{% include "./includes/header.html" %}
+    <ul>
+        {% for month in months %}
+        <li><a href="{% url "month-challenge" month=month %}">{{ month|title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

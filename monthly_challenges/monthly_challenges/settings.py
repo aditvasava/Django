@@ -10,6 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+# Two ways of adding the functionality of sending html files to user
+# 1. edit the INSTALLED_APPS list (preferred way)
+# 2. edit the TEMPLATES LIST (Use this to include any global templates that are not app specific)
+
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +36,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # by adding challenges to this list, django is aware of this app, so it will look for files in the templates directory
+    'challenges', # this name should be same as the one defined in the apps.py file in the particular app
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +62,12 @@ ROOT_URLCONF = 'monthly_challenges.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # Inside DIRS, add path that we want django to consider for templates,
+        # The paths should always include the base_dir as it can only recognize absolute path.
+        'DIRS': [
+            # BASE_DIR / "challenges" / "templates"
+            BASE_DIR / "templates"
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

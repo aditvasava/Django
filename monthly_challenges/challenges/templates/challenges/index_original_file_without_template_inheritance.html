@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>All Challenges</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <ul>
+            {% comment %}
+            Using for tags to loop over the name of months
+            seach google for django tags to see more
+            {% endcomment %}
+            {% for month in months %}
+
+            {% comment %} <li><a href="/challenges/{{month}}">{{ month|title }}</a></li> - in this way, we are still hardcoding the first part of url.
+            
+            using the url tag, month-challenge is the name that we gave to the url in the urls.py file
+            In month=month(arg=name), left side is the argument name defined in the urls.py file and right side is the for loop iterator variable name
+            now, the href is completely dynamic
+            {% endcomment %}
+            <li><a href="{% url "month-challenge" month=month %}">{{ month|title }}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
+

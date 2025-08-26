@@ -1,0 +1,24 @@
+{% comment %} 
+So this is the base html file, this is kind of like the layout file where some elements are common to all pages in the project
+{% endcomment %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+
+            {% comment %} It is not compulsory to write something between the block("My Challenges"), we can leave it empty, but it is always nice to give some default value{% endcomment %}
+            {% comment %} block is something like a placeholder, it will get replaced by something from files that import base.html {% endcomment %}
+            {% block page_title %} My Challenges {% endblock %}
+        </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% block content %}{% endblock %}
+    </body>
+</html>
+
