@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% comment %} This is kind of like importing the base.html file. Always write extends at the top of file otherwise django will throw error. {% endcomment %}
+
+{% comment %} Load static is kind of like importing a plugin {% endcomment %}
 {% load static %}
 
 {% comment %} 
-To use css files, use this method 
+To use css files, use this method
+the static in href is coming from the settings.py file,
+so the path constructued would be static/challenges/challenges.css
 {% endcomment %}
 {% block css_files %}
 <link rel="stylesheet" href="{% static "challenges/challenges.css" %}">

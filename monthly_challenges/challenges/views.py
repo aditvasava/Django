@@ -96,7 +96,9 @@ def monthly_challenge(request, month):
     except:
         # this will look for 404.html in the templates folder at the root level, so make sure this file exists
         # for this to work, debug should be set to false in settings.py file
-        raise Http404()
+        raise Http404() # We can pass error message inside Http404() if required.
         # response_data = render_to_string("404.html") # we cannot use render() as it only works for success status codes
+        
+        # We cannot use filenames when using HttpResponseNotFound, which means we are responsible for sending the necessary html data.
         # return HttpResponseNotFound("<h2>Month does not exist</h2>")
         # return HttpResponseNotFound(response_data)

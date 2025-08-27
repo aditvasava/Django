@@ -58,7 +58,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'monthly_challenges.urls'
-
+# !!! below statement is true for most of the paths defined in other variables
+# The paths defined in this are kind of like environment variables of windows
+# we just paste the bin folder path of g++ and then from anywhere on windows we can run gcc.
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -66,7 +68,7 @@ TEMPLATES = [
         # The paths should always include the base_dir as it can only recognize absolute path.
         'DIRS': [
             # BASE_DIR / "challenges" / "templates"
-            BASE_DIR / "templates"
+            BASE_DIR / "templates" # This path makes sure that the global templates can be read from anywhere in the project.
         ],
         'APP_DIRS': True,
         'OPTIONS': {
