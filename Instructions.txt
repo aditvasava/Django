@@ -111,3 +111,14 @@ Template Language & Variable Interpolation
 Django Template Language (DTL)
 
 Standard HTML Syntax + Special DTL Syntax = Dynamic HTML content returned with response
+
+For global templates & static files, create the folder with respective name at the root level of the project.
+
+--------------------------------------------------------------------------------------------------------------------
+
+My-Site Project
+
+/
+/posts
+/posts/my-first-post
+/posts/<slug OR id>
