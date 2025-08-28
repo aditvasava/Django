@@ -19,11 +19,14 @@ class Book(models.Model):
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     author = models.CharField(null=True, max_length=100)
     is_bestselling = models.BooleanField(default=False)
+    slug = models.SlugField(default="", null=False, db_index=True, blank=True, editable=False) # Harry Potter 1 => harry-potter-1
     # db_index is used behind the scenes to optimize the db when doing read operations
     # we know that slug will be used a lot for rendering book_detail page, so we can set this parameter which will store the slugs in more
     # efficient manner, however don't set many columns as db_index as that will increase the time it takes to insert data, as for every new row
     # added, the db has to make internal adjusments for creating indexes (sorting)
-    slug = models.SlugField(default="", null=False, db_index=True) # Harry Potter 1 => harry-potter-1
+
+    # blank=True & editable=False was added after the admin was set up, as we don't enter values for slug from the UI, this field is set up
+    # automatically from the title.
 
     # there is also another setting "blank=True" which can be used in replacement of "null=True"
 
@@ -31,9 +34,11 @@ class Book(models.Model):
         return reverse("book-detail", args=[self.slug])
 
     # before we save the data to the db, this function gets executed and it creates the slug based on the title
+    """
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+    """
 
     # This method is used to view the data when running command from the shell. 
     def __str__(self):

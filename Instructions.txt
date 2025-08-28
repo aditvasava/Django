@@ -197,7 +197,6 @@ hp = Book.objects.all()[0]
 hp.delete()
 
 ----------------------------------------------------------------------------------
-
 Querying & Filtering Data
 
 Book.objects.get(id=3)
@@ -226,3 +225,13 @@ This is OR condition of SQL
 Book.objects.filter(Q(rating__lt=3) | Q(is_bestselling=True))
 
 Book.objects.filter(Q(rating__lt=3) | Q(is_bestselling=True), Q(author="J.K. Rowling"))
+
+
+----------------------------------------------------------------------------------
+Admin
+
+python manage.py createsuperuser
+enter username
+enter email
+enter password
+confirm password
