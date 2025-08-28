@@ -115,6 +115,7 @@ Standard HTML Syntax + Special DTL Syntax = Dynamic HTML content returned with r
 For global templates & static files, create the folder with respective name at the root level of the project.
 
 --------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 
 My-Site Project
 
@@ -122,3 +123,106 @@ My-Site Project
 /posts
 /posts/my-first-post
 /posts/<slug OR id>
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+Book Store Project
+
+Data
+
+Temporary Data - Form inputs - data used immediately and lost forever (stored in variables)
+Semi-Persistent Data - User authentication status (stored in browser - cookies, temp files)
+Persistent Data - data stored for long time (stored in db)
+
+----------------------------------------------------------------------------------
+Django Models
+
+Define data models and use objects based on those models to run operations
+Django models translate instructions (written with python) to SQL queries
+
+----------------------------------------------------------------------------------
+Migrations
+
+Migrations are steps that tell django what to do - such as create a table, insert values into table etc.
+
+first define the class in the models.py file and then, from the root directory of the project in terminal
+- python manage.py makemigrations (this command will populate all the apps where there is a need for migration)
+- python manage.py migrate (above command just creates the files, this command will actually do the job.)
+
+###########################
+Create
+
+python manage.py shell (This will give a shell in terminal to run commands)
+
+from book_outlet.models import Book     (from [APP_NAME].models import [CLASS_NAME])
+
+harry_potter = Book(title="Harry Potter 1", rating=5)
+harry_potter.save() (This will do the insert into db command of sql)
+
+lord_of_rings = Book(title="Lord of the Rings", rating=4)
+lord_of_rings.save()
+
+2nd way of adding data
+
+Book.objects.create(title="My Story", rating=2, author="Max", is_bestselling=False)
+
+###########################
+Read (Add the SQLite Viewer extenstion in VS code by Florian Klampfer)
+
+Book.objects.all() ([className].objects.all())
+above command will log a <QuerySet> (Kind of like an array)
+
+Add the __str__() method in the models.py file to actually see the data in the shell.
+
+!!! Migrations can also be rolled back, dependency array in the generated file after makemigrations takes care of this.
+
+###########################
+Update
+
+Select the row to update
+hp = Book.objects.all()[0]
+hp.title
+
+update the required fields, this will only change the object values
+hp.author = "J.K. Rowling"
+hp.is_bestselling = True
+
+This will actually update the db, save() can be used for both creating and updating values
+hp.save()
+
+###########################
+Delete
+
+hp = Book.objects.all()[0]
+hp.delete()
+
+----------------------------------------------------------------------------------
+
+Querying & Filtering Data
+
+Book.objects.get(id=3)
+Book.objects.get(title="My Story")
+Book.objects.get(rating=5)
+
+When using .get(), make sure that there is only 1 row that matches the condition,
+Book.objects.get(is_bestselling=True)
+above command will throw error as there are multiple fields that match this criteria
+
+
+Book.objects.filter(is_bestselling=True) (This will give queryset)
+Book.objects.filter(is_bestselling=False, rating=2)
+
+Book.objects.filter(rating<3) (This will throw error)
+
+Instead use this, look docs for more commands
+Book.objects.filter(rating__lt=3)
+
+This is the AND condition of SQL
+Book.objects.filter(rating__lt=3, title__contains="story") (__contains ignores case-sensitivity so "lemon" & "Lemon", both will be there in output)
+
+from django.db.models import Q
+
+This is OR condition of SQL
+Book.objects.filter(Q(rating__lt=3) | Q(is_bestselling=True))
+
+Book.objects.filter(Q(rating__lt=3) | Q(is_bestselling=True), Q(author="J.K. Rowling"))
