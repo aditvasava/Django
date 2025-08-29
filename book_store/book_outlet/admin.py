@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book
+from .models import Book, Author, Address
 
 # Register your models here.
 
@@ -14,4 +14,6 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ("title", "author")
 
 # After writing below line, we can see the appname and the Book model from the admin UI
-admin.site.register(Book)
+admin.site.register(Book, BookAdmin)
+admin.site.register(Author)
+admin.site.register(Address)

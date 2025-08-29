@@ -226,7 +226,6 @@ Book.objects.filter(Q(rating__lt=3) | Q(is_bestselling=True))
 
 Book.objects.filter(Q(rating__lt=3) | Q(is_bestselling=True), Q(author="J.K. Rowling"))
 
-
 ----------------------------------------------------------------------------------
 Admin
 
@@ -235,3 +234,43 @@ enter username
 enter email
 enter password
 confirm password
+
+
+----------------------------------------------------------------------------------
+Create Author Model
+
+add it as the foreign key in the Book model
+
+###########################
+Cross Model Queries
+
+So Book is the main model in which we have use the Author model as a reference, and this code is to run queries on the Book model
+hp = Book.objects.get(title="Harry Potter 1")
+hp.author
+<Author: Author object (1)>
+hp.author.first_name
+
+book_by_rowling = Book.objects.filter(author__last_name="Rowling")
+book_by_rowling = Book.objects.filter(author__last_name__contains="wling")
+
+We can also do the opposite of this, run queries on Author model and get information of Book model from it.
+
+jkr = Author.objects.get(first_name="J.K.")
+jkr.book_set
+jkr.book_set.all()
+
+Post
+    - title
+    - excerpt
+    - image name
+    - date
+    - slug
+    - content
+
+Author
+    - first name
+    - last name
+    - email
+
+Tag
+    - Caption (HashTags)

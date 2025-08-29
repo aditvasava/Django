@@ -5,6 +5,30 @@ from django.utils.text import slugify
 
 # Create your models here.
 
+# One author can have only one address
+class Address(models.Model):
+    street = models.CharField(max_length=80)
+    postal_code = models.CharField(max_length=5)
+    city = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.street}, {self.postal_code}, {self.city}"
+    
+    # To change the display name in the /admins/
+    class Meta:
+        verbose_name_plural = "Address Entries"
+
+class Author(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True)
+
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+    
+    def __str__(self):
+        return self.full_name()
+
 # every custom class that we define has to import or extend another class which is - models.Model
 # a field named "id" that will auto-increment is automatically created.
 
@@ -17,7 +41,9 @@ class Book(models.Model):
     title = models.CharField(max_length=50)
     # rating can either be between 1 to 5
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
-    author = models.CharField(null=True, max_length=100)
+    # author = models.CharField(null=True, max_length=100)
+    # We set the another model as the data type
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name="books") # Cascade means if an author is deleted from the db, then delete all the records in the book table which had that author
     is_bestselling = models.BooleanField(default=False)
     slug = models.SlugField(default="", null=False, db_index=True, blank=True, editable=False) # Harry Potter 1 => harry-potter-1
     # db_index is used behind the scenes to optimize the db when doing read operations
