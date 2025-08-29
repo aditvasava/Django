@@ -274,3 +274,15 @@ Author
 
 Tag
     - Caption (HashTags)
+
+----------------------------------------------------------------------------------
+Form
+
+CSRF - Cross-Site Request Forgery
+
+There is a bank page, I could go ahead copy their template, create a similar looking page and send it to victim,
+the victim enters the bank details and when that data passes through me, I change the form data and do something such that, 
+the money reaches my accout. This issue is solved by django through csrf tokens.
+
+In the form code logic, type {% csrf_token %}, django behind the scenes (can view it in the inspect element) will add a hidden
+input with csrf data, so now the server will not accept any invalid data submitted to it.
