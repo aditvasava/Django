@@ -80,6 +80,13 @@ You're building google, so google is the main project, gmap, gmail, gimage can b
 
 The only important file for now is the "views.py" file, this is the file which is used to display content on webpage
 
+###########################
+TOC for Projects
+
+1. monthly_challenges
+2. mysite
+3. book_store
+
 ----------------------------------------------------------------------------------
 URLs (Routes) & Views
 
@@ -95,7 +102,7 @@ localhost:8000/challenges/january
 
 go to ./challenges/views.py
 define the function
-create urls.py file inside challenges folder
+create urls.py file inside challenges app
 
 ----------------------------------------------------------------------------------
 Templates & Static Files
@@ -104,6 +111,24 @@ So we want to send html files to user
 
 Create a folder named "templates" in the challenges app (This name should always be "templates")
 create a sub-folder named challenges in the templates and then create .html files inside it (The names inside the templates folder can be anything)
+After this go to settings.py to see the configuration of allowing django to recognize these template files.
+
+challenges (APP)
+  - templates (Folder)
+    - challenges (Another Folder)
+      - file.html (The actual template file)
+
+Why this kind of structure is required ?
+If we have multiple apps in the project, and if there was no subfolder inside templates folder, 
+
+basically if we had this,
+
+challenges
+  - templates
+    - file.html
+
+then, if there was the same filename (file.html) in another app, then django would fail to understand which file to serve. that's why
+it is a convention to add the appname as subfolder inside templates directory to avoid ambiguity.
 
 ----------------------------------------------------------------------------------
 Template Language & Variable Interpolation
@@ -111,6 +136,11 @@ Template Language & Variable Interpolation
 Django Template Language (DTL)
 
 Standard HTML Syntax + Special DTL Syntax = Dynamic HTML content returned with response
+
+return render(request, "challenges/challenge.html", {"text": challenge_text, "title": month})
+
+So we have this in one of the views, the third argument to the above render function is a dictionary that can be passed to the the template,
+inside the template file, we can use these variables using {{ text }}.
 
 For global templates & static files, create the folder with respective name at the root level of the project.
 
@@ -126,7 +156,9 @@ My-Site Project
 
 --------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------
-Book Store Project
+Book Store Project (Used for testing models and database)
+
+Created an app called book_outlet
 
 Data
 
@@ -171,6 +203,9 @@ Read (Add the SQLite Viewer extenstion in VS code by Florian Klampfer)
 
 Book.objects.all() ([className].objects.all())
 above command will log a <QuerySet> (Kind of like an array)
+
+Book.objects.all()[1].author
+Book.objects.all()[1].rating
 
 Add the __str__() method in the models.py file to actually see the data in the shell.
 

@@ -38,7 +38,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # by adding challenges to this list, django is aware of this app, so it will look for files in the templates directory
     'challenges', # this name should be same as the one defined in the apps.py file in the particular app
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,6 +69,8 @@ TEMPLATES = [
             # BASE_DIR / "challenges" / "templates"
             BASE_DIR / "templates" # This path makes sure that the global templates can be read from anywhere in the project.
         ],
+        # If using below variable (APP_DIRS set to True), then simply add the app name to the INSTALLED_APPS list and django will
+        # automatically recognize the features of the app such as template detection
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

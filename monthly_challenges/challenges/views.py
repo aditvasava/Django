@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 # the request parameter in the below function is compulsory even though it is not being used in the function 
 # def january(request):
     
-#     # Returning an object of class HttpResponse (Here we are just returning a string, but we can also send http file as response)
+#     # Returning an object of class HttpResponse (Here we are just returning a string, but we can also send html file as response)
 #     return HttpResponse("Django is working")
 
 # def february(request):
