@@ -5,6 +5,10 @@ from django.utils.text import slugify
 
 # Create your models here.
 
+class Country(models.Model):
+    name = models.CharField(max_length=80)
+    code = models.CharField(max_length=2)
+
 # One author can have only one address
 class Address(models.Model):
     street = models.CharField(max_length=80)
@@ -21,6 +25,7 @@ class Address(models.Model):
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    # One-to-One relation, 1 author has only 1 address OR 1 address belongs to 1 author
     address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True)
 
     def full_name(self):
@@ -39,12 +44,22 @@ class Author(models.Model):
 # If new method is added to the model, then there is no need to do makemigration
 class Book(models.Model):
     title = models.CharField(max_length=50)
+    
     # rating can either be between 1 to 5
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    
     # author = models.CharField(null=True, max_length=100)
-    # We set the another model as the data type
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name="books") # Cascade means if an author is deleted from the db, then delete all the records in the book table which had that author
+    # Earlier we had the above field as column, now, we set the another model as the data type
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name="books")
+    # models.ForeignKey will store a pointer to a entry in the Author model. on the screen we will see ids as values, but they are
+    # under the hood pointers.
+    # CASCADE means if an author from the Author model is deleted from the db,
+    # then delete all the records in the book table which had that author
+    # There is also PROTECT which will not delete the entry if Author is deleted.
+    # There is also SET_NULL which will give the value as NULL if the Author is deleted.
+    
     is_bestselling = models.BooleanField(default=False)
+    
     slug = models.SlugField(default="", null=False, db_index=True, blank=True, editable=False) # Harry Potter 1 => harry-potter-1
     # db_index is used behind the scenes to optimize the db when doing read operations
     # we know that slug will be used a lot for rendering book_detail page, so we can set this parameter which will store the slugs in more
@@ -55,6 +70,8 @@ class Book(models.Model):
     # automatically from the title.
 
     # there is also another setting "blank=True" which can be used in replacement of "null=True"
+
+    published_countries = models.ManyToManyField(Country)
 
     def get_absolute_url(self):
         return reverse("book-detail", args=[self.slug])

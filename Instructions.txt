@@ -242,7 +242,6 @@ When using .get(), make sure that there is only 1 row that matches the condition
 Book.objects.get(is_bestselling=True)
 above command will throw error as there are multiple fields that match this criteria
 
-
 Book.objects.filter(is_bestselling=True) (This will give queryset)
 Book.objects.filter(is_bestselling=False, rating=2)
 
@@ -270,10 +269,25 @@ enter email
 enter password
 confirm password
 
+This will allow to create a user to log in to the admin panel.
+To see the models and all, go to the app, then inside admin.py
+
 
 ----------------------------------------------------------------------------------
-Create Author Model
+Data Relationships
 
+One-to-Many
+1 Author has written many books.
+
+Many-to-One
+
+One-to-One
+1 Book belongs to only one author.
+
+Many-to-Many
+Multiple books can be published in many countries.
+
+Create Author Model
 add it as the foreign key in the Book model
 
 ###########################
